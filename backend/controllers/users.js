@@ -37,4 +37,8 @@ const SignUp = async (req, res) => {
     }
 }
 
-module.exports = { SignIn, SignUp };
+const Teste = async (req, res) => {
+    res.send("API do Ladies of Wisdom está rodando 🚀");
+}
+
+module.exports = { SignIn, SignUp, Teste };
