@@ -5,6 +5,9 @@ const userRoute = require('./routes/users');
 
 app.use(express.json());
 app.use('/users', userRoute);
+app.get("/", (req, res) => {
+    res.send("API do Ladies of Wisdom está rodando 🚀");
+});
 
 dbConfig();
 
