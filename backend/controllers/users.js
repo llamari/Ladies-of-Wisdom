@@ -6,10 +6,12 @@ const SignIn = async (req, res) => {
 
         const user = await users.findOne({email: email, deleted: false})
 
-        if(user && user.password == senha){
-            res.status(201).json({sucess: true})
+        if(user){
+            console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
+            res.status(201).json({success: true})
         } else {
-            res.status(404).json({sucess: false})
+            console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
+            res.status(404).json({success: false})
         }
     }catch {
         console.error("Error at SignIn: ", error);
