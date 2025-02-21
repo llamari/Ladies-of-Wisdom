@@ -5,7 +5,7 @@ const app = express()
 const userRoute = require('./routes/users');
 
 app.use(cors({
-    origin: "*", // Permite qualquer origem
+    origin: ["http://localhost:3000", "https://ladies-of-wisdom-production.up.railway.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
