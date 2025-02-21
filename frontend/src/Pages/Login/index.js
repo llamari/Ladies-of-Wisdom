@@ -8,13 +8,13 @@ function Login() {
         const mail = document.getElementById("e-mail").value;
         const senha = document.getElementById("password").value;
 
-        const response = await axios.post('http://localhost:5000/users/signin', {
+        const response = await axios.post('https://ladies-of-wisdom-production.up.railway.app/users/signin', {
             email: mail, senha: senha
         })
 
         console.log(response.data);
 
-        if(response.data.sucess == true){
+        if(response.data.success == true){
             console.log("UHULLLL")
         } else{
             console.log("aaaaa.....")
