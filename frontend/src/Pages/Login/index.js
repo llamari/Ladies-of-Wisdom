@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import './index.css';
 
 function Login() {
 
@@ -15,21 +16,28 @@ function Login() {
         console.log(response.data);
 
         if(response.data.success == true){
-            console.log("UHULLLL")
+            window.location.href = '/';
         } else{
-            console.log("aaaaa.....")
+            document.getElementById('wrong-login').style.display = 'flex'
         }
     }
 
     return(
         <div>
-            <div>
-                <form id="login"onSubmit={SignIn}>
-                    <input type="email" id="e-mail"/>
-                    <input type="password" id="password"/>
-                    <button type="submit">Entrar</button>
+            <section id="secao">
+                <img src="./assets/Logo.png" id="logo-login"/>
+                <form id="login" onSubmit={SignIn}>
+                    <h2 id="title">LOGIN</h2>
+                    <label htmlFor="e-mail"><b>E-mail:</b></label>
+                    <input type="email" id="e-mail" className="log"/>
+                    <label htmlFor="password"><b>Senha:</b></label>
+                    <input type="password" id="password" className="log"/>
+
+                    <span id="wrong-login">E-mail ou senha inválidos!</span>
+                    <button type="submit" id="go">ENTRAR</button>
+                    <p>Se você ainda não tem uma conta, entre em contato com as organizadoras do projeto por <a>aqui</a> para verificar a disponibilidade de vagas!</p>
                 </form>
-            </div>
+            </section>
         </div>
     )
 }

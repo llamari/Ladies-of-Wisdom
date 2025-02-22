@@ -8,10 +8,10 @@ const SignIn = async (req, res) => {
 
         if(user){
             console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
-            res.status(201).json({success: true})
+            res.json({success: true})
         } else {
             console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
-            res.status(404).json({success: false})
+            res.json({success: false})
         }
     }catch {
         console.error("Error at SignIn: ", error);
