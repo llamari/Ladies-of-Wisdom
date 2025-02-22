@@ -8,8 +8,7 @@ body {
     height: 6rem;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza a logo */
-    position: relative; /* Necessário para posicionamento absoluto do ícone */
+    justify-content: center; 
 }
 
 #header img {
