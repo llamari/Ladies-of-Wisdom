@@ -16,7 +16,7 @@ function Login() {
         console.log(response.data);
 
         if(response.data.success == true){
-            window.location.href = '/';
+            window.location.href = '/home';
         } else{
             document.getElementById('wrong-login').style.display = 'flex'
         }

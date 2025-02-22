@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './index.css'
 
 function Landpage() {
@@ -7,7 +8,7 @@ function Landpage() {
         <div>
             <header id="header">
                 <img src="/assets/LW.png" alt="Logo" />
-                <a id="entrar">Entrar</a>
+                <Link id="entrar" to={'/login'}>Entrar</Link>
             </header>
             <div id="div1">
                 <div>
