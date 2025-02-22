@@ -6,7 +6,7 @@ const SignIn = async (req, res) => {
 
         const user = await users.findOne({email: email, deleted: false})
 
-        if(user){
+        if(user && user.password == senha){
             console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
             res.json({success: true})
         } else {
