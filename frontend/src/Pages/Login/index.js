@@ -35,7 +35,7 @@ function Login() {
 
                     <span id="wrong-login">E-mail ou senha inválidos!</span>
                     <button type="submit" id="go">ENTRAR</button>
-                    <p>Se você ainda não tem uma conta, entre em contato com as organizadoras do projeto por <a>aqui</a> para verificar a disponibilidade de vagas!</p>
+                    <p>Se você ainda não tem uma conta, entre em contato com as organizadoras do projeto por <a href="mailto:ladiesofwisdomm@gmail.com">aqui</a> para verificar a disponibilidade de vagas!</p>
                 </form>
             </section>
         </div>
