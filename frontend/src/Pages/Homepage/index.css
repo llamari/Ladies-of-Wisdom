@@ -24,3 +24,22 @@ body {
     text-align: center;
     font-size: 5rem;
 }
+
+.card-materia{
+    height: 40vh;
+    width: 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255));
+    border-radius: 1.5rem;
+    margin: 2.5%;
+}
+
+.card-title{
+    background-color: #EA7CBE;
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding-left: 1rem;
+    line-height: 3rem;
+    color: #fff;
+    margin: 0%;
+}

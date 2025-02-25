@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express()
 const userRoute = require('./routes/users');
+const subjectRoute = require('./routes/subject')
 
 app.use(cors({
     origin: "*",
@@ -12,6 +13,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use('/users', userRoute);
+app.use('/subj', subjectRoute);
 app.get("/", (req, res) => {
     res.send("API do Ladies of Wisdom está rodando 🚀");
 });
