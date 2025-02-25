@@ -7,7 +7,7 @@ function Home() {
     const [subj, setSubj] = useState([]);
 
     async function materias() {
-        const response = await axios.get('http://localhost:5000/subj/subject')
+        const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/subj/subject')
         setSubj(response.data);
         console.log(subj);
         console.log(response.data)
