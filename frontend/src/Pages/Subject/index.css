@@ -1,0 +1,25 @@
+.task {
+    background-color: #fff;
+    width: 90%;
+    margin: 1rem 5%;
+    padding: .2rem 1rem 1rem 1rem;
+    border-radius: 1rem;
+}
+
+.task a{
+    background-color: rgb(179, 179, 179);
+    color: #000;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.background-subject {
+    background-color: #FFDFF2;
+    border-radius: 2rem 2rem 0 0;
+    padding: 1rem;
+    width: 90%;
+    margin: 2rem 5% 0 5%;
+    justify-content: center;
+    color: #C18B2A;
+}
