@@ -27,12 +27,13 @@ body {
 
 .card-materia{
     height: 40vh;
-    width: 30%;
+    width: 25%;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255));
     border-radius: 1.5rem;
-    margin: 2.5%;
+    margin: 2.5% 2.5% 0 2.5%;
+    text-decoration: none;
 }
 
 .card-title{

@@ -1,4 +1,5 @@
 const users = require('../models/users');
+const jwt = require('jsonwebtoken');
 
 const SignIn = async (req, res) => {
     try{
@@ -8,12 +9,13 @@ const SignIn = async (req, res) => {
 
         if(user && user.password == senha){
             console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
-            res.json({success: true})
+            const token = jwt.sign({ id: user._id, master: user.master }, process.env.JWT_SECRET, { expiresIn: '24h' });
+            console.log(token);
+            res.json({success: true, token})
         } else {
-            console.log('email: '+ email + '\nsenha:' + senha + '\nUser: ' + user)
             res.json({success: false})
         }
-    }catch {
+    }catch(error) {
         console.error("Error at SignIn: ", error);
         res.status(404);
     }
@@ -43,4 +45,17 @@ const Teste = async (req, res) => {
     res.send("API do Ladies of Wisdom está rodando 🚀");
 }
 
-module.exports = { SignIn, SignUp, Teste };
+const Master = async (req, res) => {
+    const token = req.header('Authorization')?.split(' ')[1]; 
+    
+    if (!token) {
+        console.log("Acesso negado, token não encontrado");
+        return res.status(401).json({ message: "Acesso negado, token não encontrado." });
+    }
+    console.log("Token recebido:", token);
+    const valid = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = valid.master;
+    res.json(userId);
+}
+
+module.exports = { SignIn, SignUp, Teste, Master };

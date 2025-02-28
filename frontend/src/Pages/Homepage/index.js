@@ -22,7 +22,7 @@ function Home() {
                 <img src="/assets/LW.png" alt="Logo" />
                 <FaRegUserCircle className="icon-user" color="white" size={60}/>
             </header>
-            <div style={{display: "flex"}}>
+            <div style={{display: "flex", flexWrap: 'wrap', justifyContent: 'space-evenly'}}>
                 {subj.map(materia => 
                     <Link to={`/subject/${materia.id}`} style={{backgroundImage: `linear-gradient(rgba(242, 154, 207, 0.4), rgba(242, 154, 207, 0.4)), url(${materia.image})`}} key={materia.id} className="card-materia">
                         <h1 className="card-title">{materia.name}</h1>

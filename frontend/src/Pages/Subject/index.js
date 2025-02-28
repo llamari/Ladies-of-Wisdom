@@ -10,6 +10,8 @@ function Subject() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [tasks, setTasks] = useState([]);
+    const [master, setMaster] = useState('');
+    const token = localStorage.getItem('token');
 
     async function Sends(e) {     
         try {
@@ -51,8 +53,19 @@ function Subject() {
                 console.error("Erro ao pegar as tasks:", error);
             }
         }
+        async function isMaster() {
+            console.log(token)
+            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/master', {
+                headers: {
+                    Authorization: `Bearer ${token}`, 
+                },
+            })
+            setMaster(response.data);
+            console.log(response.data);
+        }
         fetchSubjects();
         fetchTasks();
+        isMaster();
     }, [id]);  // Roda sempre que o ID mudar
 
     return (
@@ -78,14 +91,19 @@ function Subject() {
                     )}
                 </div>
 
-                <div>
-                    <form>
-                        <input type="text" id="task-title"/>
-                        <input type="text" id="task-name"/>
-                        <input type="text" id="task-link"/>
-                        <button onClick={Sends}>ENVIAR</button>
-                    </form>
-                </div>
+                {master == true ?
+                    <div>
+                        <form>
+                            <input type="text" id="task-title"/>
+                            <input type="text" id="task-name"/>
+                            <input type="file" id="task-link"/>
+                            <button onClick={Sends}>ENVIAR</button>
+                        </form>
+                    </div>
+                    :
+                    <div/>
+                }
+                
 
                 {tasks.map((task) => 
                     <div className="task">

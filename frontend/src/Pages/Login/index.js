@@ -16,6 +16,7 @@ function Login() {
         console.log(response.data);
 
         if(response.data.success == true){
+            localStorage.setItem('token', response.data.token);
             window.location.href = '/home';
         } else{
             document.getElementById('wrong-login').style.display = 'flex'
