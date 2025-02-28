@@ -11,13 +11,16 @@ function Subject() {
     const [error, setError] = useState(null);
     const [tasks, setTasks] = useState([]);
     const [master, setMaster] = useState('');
+    const [data, setData] = useState(['']);
     const token = localStorage.getItem('token');
 
-    async function Sends(e) {     
+    async function Sends(e) {
+        e.preventDefault();     
         try {
             const title = document.getElementById('task-title').value;
             const name = [document.getElementById('task-name').value]; // Envia como array
-            const link = [document.getElementById('task-link').value]; // Envia como array
+            const link = [data]; // Envia como array
+            console.log(data)
     
             const response = await axios.post(
                 'https://ladies-of-wisdom-production.up.railway.app/task/add', 
@@ -30,6 +33,21 @@ function Subject() {
             console.error("Erro ao enviar a tarefa:", error);
         }
     }
+
+    async function handleUpload(e) {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+    
+        const response = await fetch("https://ladies-of-wisdom-production.up.railway.app/task/upload", {
+            method: "POST",
+            body: formData
+        });
+    
+        const jsonResponse = await response.json(); // Lê o JSON uma única vez
+        setData(jsonResponse.url);
+        console.log("Arquivo salvo em:", jsonResponse);
+    }      
 
     useEffect(() => {
         async function fetchSubjects() {
@@ -92,13 +110,8 @@ function Subject() {
                 </div>
 
                 {master == true ?
-                    <div>
-                        <form>
-                            <input type="text" id="task-title"/>
-                            <input type="text" id="task-name"/>
-                            <input type="file" id="task-link"/>
-                            <button onClick={Sends}>ENVIAR</button>
-                        </form>
+                    <div className="add-task">
+                        <h1>+</h1>
                     </div>
                     :
                     <div/>
@@ -112,8 +125,21 @@ function Subject() {
                     </div>
                 )}
             </div>
+
+            <div id="popup-add-task">
+                <form onSubmit={Sends}>
+                    <label>Insira o título do post</label>
+                    <input id="task-title"/>
+                    <label>Título do item</label>
+                    <input id="task-name"/>
+                    <label>Item</label>
+                    <input type="file" onChange={handleUpload}/>
+                    <button>ENVIAR</button>
+                </form>
+            </div>
         </div>
     );
 }
 
 export default Subject;
+
