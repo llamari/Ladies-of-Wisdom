@@ -12,6 +12,7 @@
     text-decoration: none;
     padding: 5px;
     border-radius: 5px;
+    margin: 0 5px 0 0;
 }
 
 .background-subject {
@@ -32,4 +33,51 @@
     font-weight: 800;
     border-radius: 5rem;
     cursor: pointer;
+}
+
+#popup-add-task{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F29ACF;
+    padding: 20px;
+    border-radius: 1rem;
+    z-index: 1000;
+    width: 30%;
+    flex-direction: column;
+}
+
+#popup-add-task label{
+    color: #7B1753;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#popup-add-task button{
+    background-color: #E464B1;
+    height: 2.5rem;
+    color: #fff;
+    width: 100%;
+    border-radius: 3rem;
+    border: none;
+    margin: 20px 0 0 0;
+    font-size: larger;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#task-title, .task-name{
+    width: 100%;
+    background-color: #D9D9D9;
+    border: none;
+    height: 1.5rem;
+    border-radius: 2rem;
+    margin: 5px 0 10px 0;
+}
+
+@media (max-width: 700px) {
+    #popup-add-task{
+        width: 80%;
+    }
 }

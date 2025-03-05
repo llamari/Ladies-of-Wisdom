@@ -68,3 +68,10 @@ body{
 #div1 button:hover {
     opacity: .8;
 }
+
+@media (max-width: 480px) {
+    #div1{
+        flex-direction: column;
+        padding: 2rem 0;
+    }
+}

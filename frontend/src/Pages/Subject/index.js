@@ -5,29 +5,35 @@ import { FaRegUserCircle } from "react-icons/fa";
 import './index.css'
 
 function Subject() {
-    const { id } = useParams();  // Pegando o ID correto da URL
+    const { id } = useParams();
     const [subj, setSubj] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [tasks, setTasks] = useState([]);
     const [master, setMaster] = useState('');
-    const [data, setData] = useState(['']);
+    const [data, setData] = useState([]);
+    const [links, setLinks] = useState(0); // Começa com 0 links
+    const [arquivo, setArquivos] = useState(0); // Começa com 0 arquivos
     const token = localStorage.getItem('token');
 
     async function Sends(e) {
         e.preventDefault();     
         try {
             const title = document.getElementById('task-title').value;
-            const name = [document.getElementById('task-name').value]; // Envia como array
-            const link = [data]; // Envia como array
-            console.log(data)
-    
+            const linkName = Array.from(document.getElementsByClassName('link-name')).map(input => input.value); 
+            const linkNormal = Array.from(document.getElementsByClassName('link')).map(input => input.value);
+            const fileName = Array.from(document.getElementsByClassName('file-name')).map(input => input.value); 
+            const fileLink = data;
+            console.log('data: ', data);
+            const name = linkName.concat(fileName); 
+            const link = linkNormal.concat(fileLink);
+
             const response = await axios.post(
                 'https://ladies-of-wisdom-production.up.railway.app/task/add', 
-                { title, name, link, id }, // Enviando um objeto JSON válido
-                { headers: { "Content-Type": "application/json" } } // Definindo o cabeçalho correto
+                { title, name, link, id },
+                { headers: { "Content-Type": "application/json" } }
             );
-    
+
             console.log(response.data);
         } catch (error) {
             console.error("Erro ao enviar a tarefa:", error);
@@ -38,23 +44,27 @@ function Subject() {
         const file = e.target.files[0];
         const formData = new FormData();
         formData.append("file", file);
-    
+
         const response = await fetch("https://ladies-of-wisdom-production.up.railway.app/task/upload", {
             method: "POST",
             body: formData
         });
-    
-        const jsonResponse = await response.json(); // Lê o JSON uma única vez
-        setData(jsonResponse.url);
+
+        const jsonResponse = await response.json(); 
+        setData((prevData) => [...prevData, jsonResponse.url]);
         console.log("Arquivo salvo em:", jsonResponse);
-    }      
+    }    
+
+    async function OpenPopUp() {
+        document.getElementById('popup-add-task').style.display = 'flex'
+    }
 
     useEffect(() => {
         async function fetchSubjects() {
             try {
                 const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/subj/subject');
                 const subjects = response.data;
-                setSubj(subjects.filter((subj) => String(subj.id) === id)); // Comparação segura
+                setSubj(subjects.filter((subj) => String(subj.id) === id));
             } catch (err) {
                 console.error("Erro ao buscar a matéria:", err);
                 setError("Erro ao carregar os dados.");
@@ -66,25 +76,27 @@ function Subject() {
             try {
                 const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/task/${id}`);
                 setTasks(response.data);
-                console.log(response.data)
             } catch (error) {
                 console.error("Erro ao pegar as tasks:", error);
             }
         }
         async function isMaster() {
-            console.log(token)
             const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/master', {
                 headers: {
                     Authorization: `Bearer ${token}`, 
                 },
             })
             setMaster(response.data);
-            console.log(response.data);
         }
         fetchSubjects();
         fetchTasks();
         isMaster();
-    }, [id]);  // Roda sempre que o ID mudar
+    }, [id]); 
+
+    // Atualiza links
+    const handleAddLink = () => setLinks(links + 1);
+    // Atualiza arquivos
+    const handleAddFile = () => setArquivos(arquivo + 1);
 
     return (
         <div>
@@ -109,32 +121,57 @@ function Subject() {
                     )}
                 </div>
 
-                {master == true ?
-                    <div className="add-task">
+                {master &&
+                    <div className="add-task" onClick={OpenPopUp}>
                         <h1>+</h1>
                     </div>
-                    :
-                    <div/>
                 }
-                
 
                 {tasks.map((task) => 
-                    <div className="task">
+                    <div className="task" key={task._id}>
                         <h2>{task.title}</h2>
-                        <a href={task.documents[0].link}>{task.documents[0].title}</a>
+                        {task.documents.map((item) => 
+                            <a href={item.link}>{item.title}</a>
+                        )}                
                     </div>
                 )}
             </div>
 
-            <div id="popup-add-task">
+            <div id="popup-add-task" style={{display: 'none'}}>
                 <form onSubmit={Sends}>
-                    <label>Insira o título do post</label>
+                    <label htmlFor="task-title">Insira o título do post:</label>
+                    <br/>
                     <input id="task-title"/>
-                    <label>Título do item</label>
-                    <input id="task-name"/>
-                    <label>Item</label>
-                    <input type="file" onChange={handleUpload}/>
-                    <button>ENVIAR</button>
+                    <br/>
+                    <div style={{ display: 'flex', gap: '20px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            {[...Array(links)].map((_, i) => (
+                                <div key={`link-${i}`} style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
+                                    <label htmlFor={`task-link-title-${i}`}>Título do link:</label>
+                                    <input className={`task-name link-name`} name={`task-link-title-${i}`} />
+                                    
+                                    <label htmlFor={`task-link-${i}`}>Link:</label>
+                                    <input className={`task-name link`} id={`task-link-${i}`} />
+                                </div>
+                            ))}
+                            <button type="button" onClick={handleAddLink}>LINK</button>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+                            {[...Array(arquivo)].map((_, i) => (
+                                <div key={`arquivo-${i}`} style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px', border: '2px solid #7B1753'}}>
+                                    <label htmlFor={`task-file-title-${i}`}>Título do arquivo:</label>
+                                    <input className={`task-name file-name`} name={`task-file-title-${i}`} />
+
+                                    <label htmlFor={`task-file-${i}`}>Arquivo:</label>
+                                    <input type="file" className={`task-file`} name={`task-file-${i}`} onChange={handleUpload} />
+                                </div>
+                            ))}
+                            <button type="button" onClick={handleAddFile}>ARQUIVO</button>
+                        </div>
+                    </div>
+
+                    <button type="submit">ENVIAR</button>
                 </form>
             </div>
         </div>
@@ -142,4 +179,3 @@ function Subject() {
 }
 
 export default Subject;
-

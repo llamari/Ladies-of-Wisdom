@@ -40,7 +40,7 @@ const GetTask = async (req, res) => {
         console.log("Tasks encontradas:", topics);
 
         if (topics.length === 0) {
-            return res.status(404).json({ message: "Nenhuma tarefa encontrada para este assunto." });
+            return res.json({ message: "Nenhuma tarefa encontrada para este assunto." });
         }
 
         res.json(topics);

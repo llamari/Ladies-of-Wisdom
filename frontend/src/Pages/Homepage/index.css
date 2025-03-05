@@ -44,3 +44,15 @@ body {
     color: #fff;
     margin: 0%;
 }
+
+@media (max-width: 768px) {
+    .card-materia {
+        width: 40%;
+    }
+}
+
+@media (max-width: 550px) {
+    .card-materia {
+        width: 80%;
+    }
+}
