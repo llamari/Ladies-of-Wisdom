@@ -4,7 +4,7 @@ body{
 }
 
 #header{
-    background-color: #FFB9E3;
+    background-color: #f18fae;
     height: 6rem;
     align-items: center;
     justify-content: center;
@@ -19,8 +19,8 @@ body{
     width: 5rem;
     height: 2rem;
     line-height: 2rem;
-    background-color: #FFDFF2;
-    border: solid #F29ACF 3px;
+    background-color: #ec91ae;
+    border: solid #FFD859 3px;
     position: absolute;
     right: 0;
     margin: 1rem;
@@ -28,7 +28,7 @@ body{
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #C18B2A;
+    color: #FFD859;
     font-size: larger;
     text-decoration: none;
 }
@@ -43,11 +43,11 @@ body{
 
 #div1{
     height: 30rem;
-    background-color: #FFDFF2;
+    background-color: #FFB9E3;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    color: #C18B2A;
+    color: #FF9C50;
 }
 
 #div1 div{

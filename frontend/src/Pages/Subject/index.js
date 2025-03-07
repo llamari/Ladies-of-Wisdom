@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 import './index.css'
 
 function Subject() {
@@ -17,7 +18,6 @@ function Subject() {
     const token = localStorage.getItem('token');
 
     async function Sends(e) {
-        e.preventDefault();     
         try {
             const title = document.getElementById('task-title').value;
             const linkName = Array.from(document.getElementsByClassName('link-name')).map(input => input.value); 
@@ -57,6 +57,12 @@ function Subject() {
 
     async function OpenPopUp() {
         document.getElementById('popup-add-task').style.display = 'flex'
+    }
+
+    async function ClosePopUp() {
+        document.getElementById('popup-add-task').style.display = 'none'
+        setArquivos(0);
+        setLinks(0)
     }
 
     useEffect(() => {
@@ -130,15 +136,19 @@ function Subject() {
                 {tasks.map((task) => 
                     <div className="task" key={task._id}>
                         <h2>{task.title}</h2>
-                        {task.documents.map((item) => 
-                            <a href={item.link}>{item.title}</a>
-                        )}                
+                        <div style={{flexWrap: 'wrap'}}>
+                            {task.documents.map((item) => 
+                                <a href={item.link}>{item.title}</a>
+                            )}
+                        </div>
+                                        
                     </div>
                 )}
             </div>
 
             <div id="popup-add-task" style={{display: 'none'}}>
                 <form onSubmit={Sends}>
+                    <IoClose style={{float: 'right'}} size={25} onClick={ClosePopUp}/>
                     <label htmlFor="task-title">Insira o título do post:</label>
                     <br/>
                     <input id="task-title"/>
@@ -146,7 +156,7 @@ function Subject() {
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             {[...Array(links)].map((_, i) => (
-                                <div key={`link-${i}`} style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
+                                <div key={`link-${i}`} className="newInfo">
                                     <label htmlFor={`task-link-title-${i}`}>Título do link:</label>
                                     <input className={`task-name link-name`} name={`task-link-title-${i}`} />
                                     
@@ -154,12 +164,12 @@ function Subject() {
                                     <input className={`task-name link`} id={`task-link-${i}`} />
                                 </div>
                             ))}
-                            <button type="button" onClick={handleAddLink}>LINK</button>
+                            <button type="button" onClick={handleAddLink}>+ LINK</button>
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
                             {[...Array(arquivo)].map((_, i) => (
-                                <div key={`arquivo-${i}`} style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px', border: '2px solid #7B1753'}}>
+                                <div key={`arquivo-${i}`} className="newInfo">
                                     <label htmlFor={`task-file-title-${i}`}>Título do arquivo:</label>
                                     <input className={`task-name file-name`} name={`task-file-title-${i}`} />
 
@@ -167,7 +177,7 @@ function Subject() {
                                     <input type="file" className={`task-file`} name={`task-file-${i}`} onChange={handleUpload} />
                                 </div>
                             ))}
-                            <button type="button" onClick={handleAddFile}>ARQUIVO</button>
+                            <button type="button" onClick={handleAddFile}>+ ARQUIVO</button>
                         </div>
                     </div>
 

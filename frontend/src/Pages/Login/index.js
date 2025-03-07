@@ -26,7 +26,7 @@ function Login() {
     return(
         <div>
             <section id="secao">
-                <img src="./assets/Logo.png" id="logo-login"/>
+                <img src="./assets/LW.png" id="logo-login"/>
                 <form id="login" onSubmit={SignIn}>
                     <h2 id="title">LOGIN</h2>
                     <label htmlFor="e-mail"><b>E-mail:</b></label>
