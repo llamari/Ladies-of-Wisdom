@@ -1,6 +1,17 @@
 const users = require('../models/users');
 const jwt = require('jsonwebtoken');
 
+const GetUsers = async (req, res) => {
+    try {
+        const allUsers = await users.find({deleted: false}); // Corrigido
+        console.log(allUsers);
+        res.json(allUsers);
+    } catch (error) {
+        console.error("Erro ao pegar usuários: ", error);
+        res.status(500).json({ error: "Erro ao buscar usuários" }); // Adicionei um status de erro
+    }
+};
+
 const SignIn = async (req, res) => {
     try{
         const { email, senha } = req.body;
@@ -58,4 +69,10 @@ const Master = async (req, res) => {
     res.json(userId);
 }
 
-module.exports = { SignIn, SignUp, Teste, Master };
+const Delete = async (req, res) => {
+    const {email} = req.body;
+    await users.updateOne({ email: email }, { $set: { deleted: true } });
+    res.json(201)
+}
+
+module.exports = { SignIn, SignUp, Teste, Master, GetUsers, Delete };
