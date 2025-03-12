@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import './index.css';
+import { Link } from "react-router-dom";
 
 function Login() {
 
@@ -25,7 +26,7 @@ function Login() {
 
     return(
         <div>
-            <section id="secao">
+            <section className="secao">
                 <img src="./assets/LW.png" id="logo-login"/>
                 <form id="login" onSubmit={SignIn}>
                     <h2 id="title">LOGIN</h2>
@@ -34,8 +35,9 @@ function Login() {
                     <label htmlFor="password"><b>Senha:</b></label>
                     <input type="password" id="password" className="log"/>
 
+                    <p><Link to={'/forgotpass'}>Esqueci a senha</Link></p>
                     <span id="wrong-login">E-mail ou senha inválidos!</span>
-                    <button type="submit" id="go">ENTRAR</button>
+                    <button type="submit" className="go">ENTRAR</button>
                     <p>Se você ainda não tem uma conta, entre em contato com as organizadoras do projeto por <a href="mailto:ladiesofwisdomm@gmail.com">aqui</a> para verificar a disponibilidade de vagas!</p>
                 </form>
             </section>

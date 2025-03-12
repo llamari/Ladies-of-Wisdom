@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaRegUserCircle,FaRegTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import Sidebar from "../../Components/Sidebar";
 import './index.css';
 
 function Users() {
     const [users, setUsers] = useState([]);
+    const [largura, setlargura] = useState(0);
+    const sidebarRef = useRef(null); // Cria uma referência para a sidebar
+
+    function OpenSidebar() {
+        setlargura(200);
+    }
+
+    function CloseSidebar() {
+        setlargura(0);
+    }
 
     async function AddUser(e) {
         try {
@@ -41,14 +53,27 @@ function Users() {
 
     useEffect(() => {
         GetUsers()
+        
+        function handleClickOutside(event) {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                CloseSidebar(); // Fecha a sidebar se o clique for fora dela
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, [])
 
     return(
         <div>
             <header id="header">
-                <img src="/assets/LW.png" alt="Logo" />
-                <FaRegUserCircle className="icon-user" color="white" size={60}/>
+                <Link to={'/home'}><img src="/assets/LW.png" alt="Logo" /></Link>
+                <FaRegUserCircle className="icon-user" color="white" size={60} onClick={OpenSidebar}/>
             </header>
+                <Sidebar largura={largura} sidebarRef={sidebarRef}/>
+        
 
             <form onSubmit={AddUser} id="add-new-user">
                 <h2>Adicionar nova usuária</h2>

@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema({
     deleted: {
         type: Boolean,
         required: true
-    }
+    },
+    code: Number,
 }, {collection: 'Users'})
 
 module.exports = mongoose.model('User', userSchema);

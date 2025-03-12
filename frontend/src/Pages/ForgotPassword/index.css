@@ -1,0 +1,10 @@
+.form-forgot{
+    width: 30%;
+    min-height: 30%;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #FFF7EE;
+    padding: 0 5% 5% 5%;
+    border-radius: 2rem;
+    color: #C18B2A;
+}
