@@ -15,7 +15,7 @@ function Senha() {
             console.log("E-mail do usuário: ", email)
             document.getElementById("user-email").value = '';
 
-            const response = await axios.post(`${process.env.API_URL}/users/password`, {
+            const response = await axios.post(`https://ladies-of-wisdom-production.up.railway.app/users/password`, {
                 email: email
             });
 
