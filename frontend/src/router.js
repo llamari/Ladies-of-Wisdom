@@ -8,6 +8,7 @@ import Users from './Pages/Users';
 import MasterRoute from './Components/MasterRoute';
 import ForgotPassword from './Pages/ForgotPassword';
 import VerifyToken from './Components/Token';
+import Spreadsheet from './Pages/Spreadsheet';
 
 function Rotas() {
     return(
@@ -19,6 +20,7 @@ function Rotas() {
                 <Route element={<VerifyToken/>}>
                     <Route path='/home' element={<Home/>}/>
                     <Route path='/subject/:id' element={<Subject/>}/>
+                    <Route path='/planilhas' element={<Spreadsheet/>}/>
                 </Route>
                 
                 <Route path='/forgotpass' element={<ForgotPassword/>}/>

@@ -4,9 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import Sidebar from "../../Components/Sidebar";
-import './index.css'
 
-function Subject() {
+function Spreadsheet() {
     const { id } = useParams();
     const [subj, setSubj] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -77,18 +76,6 @@ function Subject() {
     }
 
     useEffect(() => {
-        async function fetchSubjects() {
-            try {
-                const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/subj/subject');
-                const subjects = response.data;
-                setSubj(subjects.filter((subj) => String(subj.id) === id));
-            } catch (err) {
-                console.error("Erro ao buscar a matéria:", err);
-                setError("Erro ao carregar os dados.");
-            } finally {
-                setLoading(false);
-            }
-        }
         async function fetchTasks() {
             try {
                 const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/task/${id}`);
@@ -105,7 +92,6 @@ function Subject() {
             })
             setMaster(response.data);
         }
-        fetchSubjects();
         fetchTasks();
         isMaster();
     }, [id]); 
@@ -138,19 +124,9 @@ function Subject() {
 
             <div className="background-subject">
                 <div>
-                    {loading ? (
-                        <p>Carregando matéria...</p>
-                    ) : error ? (
-                        <p>{error}</p>
-                    ) : subj.length > 0 ? (
-                        subj.map((mat) => (
-                            <div key={mat.id}>
-                                <h1>{mat.name}</h1>
-                            </div>
-                        ))
-                    ) : (
-                        <p>Matéria não encontrada.</p>
-                    )}
+                    <div>
+                        <h1>Planilhas</h1>
+                    </div>
                 </div>
 
                 {master == true &&
@@ -200,7 +176,7 @@ function Subject() {
                                     <input className={`task-name file-name`} name={`task-file-title-${i}`} />
 
                                     <label htmlFor={`task-file-${i}`}>Arquivo:</label>
-                                    <input type="file" className={`task-file`} name={`task-file-${i}`} onChange={handleUpload} accept="application/pdf"/>
+                                    <input type="file" className={`task-file`} name={`task-file-${i}`} onChange={handleUpload} accept=".xml"/>
                                 </div>
                             ))}
                             <button type="button" onClick={handleAddFile}>+ ARQUIVO</button>
@@ -214,4 +190,4 @@ function Subject() {
     );
 }
 
-export default Subject;
+export default Spreadsheet;

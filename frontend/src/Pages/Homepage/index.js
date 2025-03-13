@@ -49,7 +49,18 @@ function Home() {
 
             <Sidebar largura={largura} sidebarRef={sidebarRef}/>
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
-                {subj.map((materia) => (
+                    <Link
+                        to={`/planilhas`}
+                        style={{
+                            backgroundImage: `linear-gradient(rgba(242, 154, 207, 0.4), rgba(242, 154, 207, 0.4))`,
+                        }}
+                        className="card-materia"
+                    >
+                        <h1 className="card-title">Planilhas</h1>
+                    </Link>   
+                    
+                                 
+                    {subj.map((materia) => (
                     <Link
                         to={`/subject/${materia.id}`}
                         style={{
@@ -61,6 +72,7 @@ function Home() {
                         <h1 className="card-title">{materia.name}</h1>
                     </Link>
                 ))}
+
             </div>
         </div>
     );
