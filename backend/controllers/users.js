@@ -141,7 +141,8 @@ const ForgotPassword = async (req, res) => {
         console.log("E-mail recebido: ", email);
         const user = await users.findOne({email: email});
         if (!user) {
-          return res.status(404).json({message: "Usuário não encontrado"});  
+            console.log("Não encontrei um usuário com esse e-mail");
+            return res.status(404).json({message: "Usuário não encontrado"});  
         } 
         const nome = user.nome
         var code = Math.floor(1000 + Math.random() * 9000);
