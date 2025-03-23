@@ -9,7 +9,7 @@ const AddTheme = async (req, res) => {
     })
 
     await newTheme.save()
-    res.status(201).json(newTask);
+    res.status(201).json(newTheme);
 }
 
 const GetThemes = async (req, res) => {
