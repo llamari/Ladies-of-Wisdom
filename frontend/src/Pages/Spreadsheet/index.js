@@ -6,7 +6,7 @@ import { IoClose } from "react-icons/io5";
 import Sidebar from "../../Components/Sidebar";
 
 function Spreadsheet() {
-    const { id } = useParams();
+    const id = 'planilhas';
     const [subj, setSubj] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -51,9 +51,18 @@ function Spreadsheet() {
     }
 
     async function handleUpload(e) {
+        console.log("Arquivos selecionados:", e.target.files); // Verifica se há arquivos
         const file = e.target.files[0];
+    
+        if (!file) {
+            console.log("Nenhum arquivo selecionado.");
+            return;
+        }
+    
         const formData = new FormData();
         formData.append("file", file);
+    
+        console.log("Enviando arquivo:", file.name);
 
         const response = await fetch("https://ladies-of-wisdom-production.up.railway.app/task/upload", {
             method: "POST",
@@ -76,6 +85,18 @@ function Spreadsheet() {
     }
 
     useEffect(() => {
+        async function fetchSubjects() {
+            try {
+                const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/subj/subject');
+                const subjects = response.data;
+                setSubj(subjects.filter((subj) => String(subj.id) === id));
+            } catch (err) {
+                console.error("Erro ao buscar a matéria:", err);
+                setError("Erro ao carregar os dados.");
+            } finally {
+                setLoading(false);
+            }
+        }
         async function fetchTasks() {
             try {
                 const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/task/${id}`);
@@ -90,8 +111,9 @@ function Spreadsheet() {
                     Authorization: `Bearer ${token}`, 
                 },
             })
-            setMaster(response.data);
+            setMaster(response.data.master);
         }
+        fetchSubjects();
         fetchTasks();
         isMaster();
     }, [id]); 
@@ -124,12 +146,10 @@ function Spreadsheet() {
 
             <div className="background-subject">
                 <div>
-                    <div>
-                        <h1>Planilhas</h1>
-                    </div>
+                    <h1>Planilhas</h1>
                 </div>
 
-                {master == true &&
+                {master &&
                     <div className="add-task" onClick={OpenPopUp}>
                         <h1>+</h1>
                     </div>
@@ -176,7 +196,7 @@ function Spreadsheet() {
                                     <input className={`task-name file-name`} name={`task-file-title-${i}`} />
 
                                     <label htmlFor={`task-file-${i}`}>Arquivo:</label>
-                                    <input type="file" className={`task-file`} name={`task-file-${i}`} onChange={handleUpload} accept=".xml"/>
+                                    <input type="file" className={`task-file`} name={`task-file-${i}`} onChange={handleUpload} accept=".xls, .xlsx, .csv"/>
                                 </div>
                             ))}
                             <button type="button" onClick={handleAddFile}>+ ARQUIVO</button>

@@ -11,14 +11,26 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: async (req, file) => ({
-    folder: 'uploads',
-    public_id: `${file.originalname.replace(/\.[^/.]+$/, "")}-LadiesOfWisdom`, // Nome do arquivo
-    resource_type: 'raw', // Mantém o arquivo como original
-    type: 'upload', // Torna público
-  }),
+  params: async (req, file) => {
+    let fileExtension = file.originalname.split('.').pop(); // Obtém a extensão do arquivo
+    const fileName = file.originalname.replace(/\.[^/.]+$/, ""); // Remove a extensão do nome
+    const resourceType = fileExtension === "pdf" ? "raw" : "auto"; // Define o tipo correto
+    if (fileExtension != 'pdf') {
+      fileExtension = '.'+fileExtension
+    } else {
+      fileExtension = ''
+    }
+
+    return {
+      folder: 'uploads',
+      public_id: `${fileName}-LadiesOfWisdom${fileExtension}`, // Mantém a extensão original
+      resource_type: resourceType, // Mantém o tipo correto do arquivo
+      type: 'upload',
+    };
+  },
 });
 
+console.log(storage.public_id)
 const upload = multer({ storage });
 
 module.exports = { cloudinary, upload };

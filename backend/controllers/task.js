@@ -5,6 +5,7 @@ const CreateTask = async (req, res) => {
         const { title, link, name, id } = req.body;
 
         if (!Array.isArray(link) || !Array.isArray(name) || link.length !== name.length) {
+            console.log("Link e name devem ser arrays de mesmo tamanho.")
             return res.status(400).json({ error: "Link e name devem ser arrays de mesmo tamanho." });
         }
 
@@ -20,6 +21,7 @@ const CreateTask = async (req, res) => {
         });
 
         await newTask.save();
+        console.log(newTask);
         res.status(201).json(newTask);
     } catch (err) {
         console.error('Erro ao criar task: ', err);

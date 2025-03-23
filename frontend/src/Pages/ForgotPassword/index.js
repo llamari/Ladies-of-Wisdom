@@ -80,6 +80,7 @@ function Senha() {
             <section className="secao" id="form2">
                 <form id="codigo" style={{display: 'none', flexDirection: 'column'}} className="form-forgot">
                     <h2>Insira o codigo enviado a você por email</h2>
+                    <p>Se não encontrar o e-mail na sua caixa de entrada, verifique a pasta de spam ou lixo eletrônico.</p>
                     <div style={{"display": "inline-flex"}}>
                         <br></br>
                         <input type="number" id="code" className="log"/>

@@ -20,7 +20,7 @@ function Rotas() {
                 <Route element={<VerifyToken/>}>
                     <Route path='/home' element={<Home/>}/>
                     <Route path='/subject/:id' element={<Subject/>}/>
-                    <Route path='/planilhas' element={<Spreadsheet/>}/>
+                    <Route path='/subject/planilhas' element={<Spreadsheet/>}/>
                 </Route>
                 
                 <Route path='/forgotpass' element={<ForgotPassword/>}/>

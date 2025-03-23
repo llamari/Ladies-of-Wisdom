@@ -103,7 +103,7 @@ function Subject() {
                     Authorization: `Bearer ${token}`, 
                 },
             })
-            setMaster(response.data);
+            setMaster(response.data.master);
         }
         fetchSubjects();
         fetchTasks();
@@ -153,7 +153,7 @@ function Subject() {
                     )}
                 </div>
 
-                {master == true &&
+                {master &&
                     <div className="add-task" onClick={OpenPopUp}>
                         <h1>+</h1>
                     </div>

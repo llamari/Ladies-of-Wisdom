@@ -7,6 +7,10 @@ function Sidebar({largura, sidebarRef}){
     const [user, setuser] = useState('');
     const token = localStorage.getItem('token');
 
+    function LogOut() {
+        localStorage.removeItem('token');
+        window.location.href = '/';
+    }
 
     useEffect(()=>{
         async function GetUser() {
@@ -41,14 +45,16 @@ function Sidebar({largura, sidebarRef}){
             <h1>Olá {user.name}!</h1>
 
             {user.master && 
-                <div id="manage-users">
+                <div className="manage-users">
                     <Link to={'/users'}>
                         Gerenciar usuárias
                     </Link>
                 </div>
             }
 
-
+            <div className="manage-users" onClick={LogOut} style={{position: 'absolute', bottom: '1rem'}}>
+                Sair
+            </div>
         </aside>   
     )
 }
