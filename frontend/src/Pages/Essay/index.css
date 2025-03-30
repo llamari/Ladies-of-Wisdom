@@ -1,0 +1,29 @@
+#theme-title{
+    width: 90%;
+    border-radius: 2rem;
+}
+
+#theme-text {
+    width: 90%;
+    border-radius: 1rem;
+    min-height: 10rem;
+    white-space: pre-wrap; /* Permite a quebra de linha ao digitar */
+    word-wrap: break-word; /* Quebra palavras longas */
+    overflow-wrap: break-word; /* Para garantir a quebra das palavras que não cabem */
+    overflow-y: auto; /* Permite rolagem se o conteúdo ultrapassar a altura */
+    resize: vertical; /* Permite redimensionar verticalmente */
+    display: block; /* Certifique-se de que o elemento se comporta como um bloco */
+    box-shadow: none; /* Certifique-se de que não há sombra aplicando um efeito visual */
+    filter: none; /* Garantir que nenhum filtro (como blur) esteja aplicado */
+}
+
+a {
+    text-decoration: none;
+    color: #C18B2A;
+}
+
+.task span {
+    color: black;
+    font-weight: 600;
+    font-family:'Times New Roman', Times, serif;
+}

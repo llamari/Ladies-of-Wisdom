@@ -6,6 +6,7 @@ const userRoute = require('./routes/users');
 const subjectRoute = require('./routes/subject')
 const taskRoute = require('./routes/task')
 const themeRoute = require('./routes/theme');
+const essayRoute = require('./routes/essay');
 
 app.use(cors({
     origin: "*",
@@ -18,6 +19,7 @@ app.use('/users', userRoute);
 app.use('/subj', subjectRoute);
 app.use('/task', taskRoute);
 app.use('/themes', themeRoute)
+app.use('/essay', essayRoute);
 app.get("/", (req, res) => {
     res.send("API do Ladies of Wisdom está rodando 🚀");
 });

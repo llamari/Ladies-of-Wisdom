@@ -10,6 +10,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import VerifyToken from './Components/Token';
 import Spreadsheet from './Pages/Spreadsheet';
 import Essay from './Pages/Essay';
+import EssayWriting from './Pages/Essay_writing';
 
 function Rotas() {
     return(
@@ -23,6 +24,7 @@ function Rotas() {
                     <Route path='/subject/:id' element={<Subject/>}/>
                     <Route path='/subject/planilhas' element={<Spreadsheet/>}/>
                     <Route path='/subject/essay' element={<Essay/>}/>
+                    <Route path='/essay/:id' element={<EssayWriting/>}/>
                 </Route>
                 
                 <Route path='/forgotpass' element={<ForgotPassword/>}/>
