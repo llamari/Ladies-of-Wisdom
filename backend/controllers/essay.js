@@ -23,6 +23,7 @@ const AddEssay = async (req, res) => {
             theme: theme,
             essay: text, // Redação em si
             writer: valid.id, // ID da escritora
+            writer_name: userExists.nome,
             grade: null, // Nota
             correction: null, // Correção
         });
@@ -54,4 +55,16 @@ const GetYourEssays = async (req, res) => {
     }
 };
 
-module.exports = { AddEssay, GetYourEssays };
+const GetThemeEssays = async (req, res) => {
+    try {
+        const { theme } = req.body;
+        const temas = await essays.find({theme: theme});
+        console.log("O tema recebido é: ", theme);
+        res.json(temas);
+    } catch (error) {
+        console.error("Erro ao buscar redações pelo tema:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+}
+
+module.exports = { AddEssay, GetYourEssays, GetThemeEssays };

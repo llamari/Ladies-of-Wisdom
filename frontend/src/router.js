@@ -11,6 +11,7 @@ import VerifyToken from './Components/Token';
 import Spreadsheet from './Pages/Spreadsheet';
 import Essay from './Pages/Essay';
 import EssayWriting from './Pages/Essay_writing';
+import User_essay from './Pages/Users_essays';
 
 function Rotas() {
     return(
@@ -30,7 +31,8 @@ function Rotas() {
                 <Route path='/forgotpass' element={<ForgotPassword/>}/>
 
                 <Route element={<MasterRoute/>}>
-                    <Route path='/users' element={<Users/>}/>                
+                    <Route path='/users' element={<Users/>}/> 
+                    <Route path='/users/essay/:id' element={<User_essay/>}/>               
                 </Route>
             </Routes>
         </BrowserRouter>
