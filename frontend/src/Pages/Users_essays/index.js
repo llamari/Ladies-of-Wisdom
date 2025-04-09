@@ -23,7 +23,7 @@ function User_essay() {
 
     useEffect(() => {
         async function GetThemeEssays() {
-            const response = await axios.post('http://localhost:5000/essay/bytheme', {
+            const response = await axios.post('https://ladies-of-wisdom-production.up.railway.app/essay/bytheme', {
                 theme: id
             })
             console.log(response.data);
@@ -61,9 +61,9 @@ function User_essay() {
                 </div>
                     <div>
                         {themeEssays.map((theme) => (
-                            <Link to={`/essay/${theme._id}`}>
+                            <Link to={`/essay/${theme.writer}/${id}`}>
                                 <div className="task" key={theme._id}>
-                                    <h2>{theme.writer_name} Bla bla bla</h2>
+                                    <h2>{theme.writer_name}</h2>
                                 </div>
                             </Link>
                         ))}

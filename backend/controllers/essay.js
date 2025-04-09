@@ -67,4 +67,32 @@ const GetThemeEssays = async (req, res) => {
     }
 }
 
-module.exports = { AddEssay, GetYourEssays, GetThemeEssays };
+const GetUserEssay = async (req, res) => {
+    try {
+        const {user, tema} = req.params;
+        console.log(`Usuário: ${user}\nTema: ${tema}`);
+        const redacao = await essays.find({theme: tema, writer: user});
+        console.log(redacao)
+        res.json(redacao);
+    } catch (error) {
+        console.error("Erro ao buscar redação do usuário:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+}
+
+const CorrectEssay = async (req, res) => {
+    try {
+        const {user, tema, grade, correcao} = req.body;
+        console.log(`Usuário: ${user}\nTema: ${tema}`);
+        const redacao = await essays.findOne({theme: tema, writer: user});
+        redacao.correction = correcao;
+        redacao.grade = grade;
+        await redacao.save();
+        res.json(redacao);
+    } catch (error) {
+        console.error("Erro ao buscar redação do usuário:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+}
+
+module.exports = { AddEssay, GetYourEssays, GetThemeEssays, GetUserEssay, CorrectEssay };

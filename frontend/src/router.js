@@ -12,6 +12,8 @@ import Spreadsheet from './Pages/Spreadsheet';
 import Essay from './Pages/Essay';
 import EssayWriting from './Pages/Essay_writing';
 import User_essay from './Pages/Users_essays';
+import EssayCorrecting from './Pages/User_essay';
+import Corrected_essay from './Pages/Corrected_essay';
 
 function Rotas() {
     return(
@@ -26,13 +28,15 @@ function Rotas() {
                     <Route path='/subject/planilhas' element={<Spreadsheet/>}/>
                     <Route path='/subject/essay' element={<Essay/>}/>
                     <Route path='/essay/:id' element={<EssayWriting/>}/>
+                    <Route path='/corrected/essay/:tema' element={<Corrected_essay/>}/>
                 </Route>
                 
                 <Route path='/forgotpass' element={<ForgotPassword/>}/>
 
                 <Route element={<MasterRoute/>}>
                     <Route path='/users' element={<Users/>}/> 
-                    <Route path='/users/essay/:id' element={<User_essay/>}/>               
+                    <Route path='/users/essay/:id' element={<User_essay/>}/>   
+                    <Route path='/essay/:user/:tema' element={<EssayCorrecting/>}/>            
                 </Route>
             </Routes>
         </BrowserRouter>
