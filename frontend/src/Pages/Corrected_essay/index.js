@@ -64,7 +64,7 @@ function Corrected_essay() {
 
             <div className="background-subject">
                 {theme && <h1>{theme.title}</h1>}
-                <div style={{display: 'flex'}}>
+                <div className="display-essay">
                     <div id="original-theme">
                     {essay ? 
                         <div>

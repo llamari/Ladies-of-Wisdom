@@ -74,7 +74,7 @@ function EssayWriting() {
             <Sidebar largura={largura} sidebarRef={sidebarRef}/>
 
             <div className="background-subject">
-                <div style={{display: 'flex'}}>
+                <div id="display-essay">
                     <div id="original-theme">
                     {theme ? 
                         <div>

@@ -36,3 +36,17 @@
     margin: .2rem .2rem 2rem .2rem;
     cursor: pointer;
 }
+
+#display-essay {
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    #display-essay{
+        flex-direction: column;
+    }
+    #original-theme, #writing-my-essay{
+        width: 95%;
+        margin-bottom: 1rem;
+    }
+}
