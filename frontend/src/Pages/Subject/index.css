@@ -121,4 +121,8 @@
     #popup-add-task{
         width: 80%;
     }
+
+    .background-subject{
+        max-width: 85vw;
+    }
 }
