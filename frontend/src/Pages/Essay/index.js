@@ -106,7 +106,9 @@ function Essay() {
                     <h1>Redação</h1>
                 </div>
 
-                {master ?
+                {master === '' ? (
+                    <p>Carregando...</p> // ou pode ser um spinner
+                ) :master ?
                     <div>
                         <div className="add-task" onClick={OpenPopUp}>
                             <h1>+</h1>

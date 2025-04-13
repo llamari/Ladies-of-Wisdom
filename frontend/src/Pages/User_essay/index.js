@@ -93,25 +93,41 @@ function EssayCorrecting() {
                         : 
                         "Carregando..."
                     }
+                    </div>
+                    
+                    {essay && essay.correction ?
+                        <div id="writing-my-essay">
+                            <h3 style={{color: 'black'}}>Nota: </h3>
+                            <p style={{width: '100%', backgroundColor: '#CBCBCB', color: 'black', borderRadius: '1rem', padding: '.5rem'}}> 
+                                {essay.grade}
+                            </p>
+                            <h3 style={{color: 'black'}}>Correção:</h3>
+                            <p style={{width: '100%', backgroundColor: '#CBCBCB', color: 'black', borderRadius: '1rem', padding: '.5rem'}}>
+                                {essay.correction}
+                            </p>
+                        </div>
+                        :
 
-                    </div>
-                    <div id="writing-my-essay">
-                        <h3>Nota: </h3>
-                        <input 
-                            value={grade}
-                            onChange={(e) => setGrade(e.target.value)}
-                        />
-                        <h3>Correção:</h3>
-                        <textarea 
-                            id="my-essay"
-                            value={correction} 
-                            onChange={(e) => setcorrection(e.target.value)}
-                        />
-                    </div>
+                        <div id="writing-my-essay">
+                            <h3>Nota: </h3>
+                            <input 
+                                value={grade}
+                                onChange={(e) => setGrade(e.target.value)}
+                            />
+                            <h3>Correção:</h3>
+                            <textarea 
+                                id="my-essay"
+                                value={correction} 
+                                onChange={(e) => setcorrection(e.target.value)}
+                            />
+                        </div>
+                    }
                 </div>
-                <button id="send-button" onClick={SendCorrection}>
-                    <FaArrowRight />
-                </button>
+                {essay && essay.correction == null &&
+                    <button id="send-button" onClick={SendCorrection}>
+                        <FaArrowRight />
+                    </button>
+                }
             </div>
         </div>
     );

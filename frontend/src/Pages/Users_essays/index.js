@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaCheckCircle  } from "react-icons/fa";
 import Sidebar from "../../Components/Sidebar";
 import './index.css';
 
@@ -60,13 +60,24 @@ function User_essay() {
                     <h1>Redações</h1>
                 </div>
                     <div>
-                        {themeEssays.map((theme) => (
-                            <Link to={`/essay/${theme.writer}/${id}`}>
-                                <div className="task" key={theme._id}>
-                                    <h2>{theme.writer_name}</h2>
-                                </div>
-                            </Link>
-                        ))}
+                        {themeEssays && themeEssays.length>0 ? 
+                            themeEssays.map((theme) => (
+                                <Link to={`/essay/${theme.writer}/${id}`}>
+                                    <div className="task" key={theme._id}>
+                                        <h2>
+                                            {theme.writer_name}
+                                            {theme.correction ? 
+                                                <FaCheckCircle color="green" style={{float: 'right'}}/>
+                                            :
+                                                <FaCheckCircle color="grey" style={{float: 'right'}}/>
+                                            }
+                                        </h2>
+                                    </div>
+                                </Link>
+                            ))
+                        :
+                            <h2 style={{color: 'black'}}>Ainda não há redações sobre esse tema</h2>
+                        }
                     </div>
             </div>
         </div>
