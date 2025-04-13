@@ -35,10 +35,10 @@ function Login() {
                     <label htmlFor="password"><b>Senha:</b></label>
                     <input type="password" id="password" className="log"/>
 
-                    <p><Link to={'/forgotpass'}>Esqueci a senha</Link></p>
+                    <p><Link to={'/forgotpass'} style={{color: '#0000FF'}}>Esqueci a senha</Link></p>
                     <span id="wrong-login">E-mail ou senha inválidos!</span>
                     <button type="submit" className="go">ENTRAR</button>
-                    <p>Se você ainda não tem uma conta, entre em contato com as organizadoras do projeto por <a href="mailto:ladiesofwisdomm@gmail.com">aqui</a> para verificar a disponibilidade de vagas!</p>
+                    <p>Se você ainda não tem uma conta, entre em contato com as organizadoras do projeto por <a href="mailto:ladiesofwisdomm@gmail.com" style={{color: '#0000FF'}}>aqui</a> para verificar a disponibilidade de vagas!</p>
                 </form>
             </section>
         </div>

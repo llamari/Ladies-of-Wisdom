@@ -42,7 +42,7 @@ function Sidebar({largura, sidebarRef}){
                 zIndex: 10,
             }}
         >
-            <h1>Olá {user.name}!</h1>
+            <h1 style={{marginLeft: '5%'}}>Olá {user.name}!</h1>
 
             {user.master && 
                 <div className="manage-users">

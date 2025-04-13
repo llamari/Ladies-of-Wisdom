@@ -48,7 +48,7 @@ function Home() {
             </header>
 
             <Sidebar largura={largura} sidebarRef={sidebarRef}/>
-            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>         
+            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly", marginBottom: '2.5%'}}>         
                     {subj.map((materia) => (
                         <Link
                             to={`/subject/${materia.id}`}

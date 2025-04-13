@@ -48,6 +48,8 @@ body{
     align-items: center;
     justify-content: space-evenly;
     color: #FF9C50;
+    height: 100%;
+    min-height: 100vh;
 }
 
 #div1 div{
@@ -63,6 +65,10 @@ body{
     height: 3rem;
     border-radius: 2rem;
     border: #7B1753 solid 3px;
+}
+
+#div1 a {
+    color: #7B1753;
 }
 
 #div1 button:hover {
