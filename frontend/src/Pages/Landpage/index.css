@@ -63,10 +63,53 @@ body{
     height: 3rem;
     border-radius: 2rem;
     border: #7B1753 solid 3px;
+    color: #7B1753;
+}
+
+#div1 button a{
+    color: #7B1753;
 }
 
 #div1 button:hover {
     opacity: .8;
+}
+
+#the-project{
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    color: #7B1753;
+}
+
+#the-project p{
+    font-size: large;
+    text-align: justify;
+    color: #000;
+}
+
+#project-img{
+    max-width: 30%;
+    clip-path: circle(50%);
+    margin: 0 3rem;
+}
+
+#platform{
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    color: #FF9C50;
+}
+
+#platform p{
+    font-size: large;
+    text-align: justify;
+    color: #000;
+}
+
+#platform-img{
+    max-width: 40%;
+    clip-path: circle(50%);
+    margin: 0 3rem;
 }
 
 @media (max-width: 480px) {
