@@ -60,6 +60,11 @@ function User_essay() {
                     <h1>Redações</h1>
                 </div>
                     <div>
+                        <div className="add-task">
+                            <Link to={`/essay/${id}`}>
+                            <h1>+</h1>
+                            </Link>
+                        </div>
                         {themeEssays && themeEssays.length>0 ? 
                             themeEssays.map((theme) => (
                                 <Link to={`/essay/${theme.writer}/${id}`}>
