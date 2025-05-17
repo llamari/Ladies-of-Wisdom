@@ -32,7 +32,7 @@ function Essay() {
             const texts = document.getElementById('theme-text').value;
 
             const response = await axios.post(
-                'https://ladies-of-wisdom-production.up.railway.app/themes/add', 
+                'https://ladies-of-wisdom.onrender.com/themes/add', 
                 { title, texts },
                 { headers: { "Content-Type": "application/json" } }
             );
@@ -54,14 +54,14 @@ function Essay() {
     useEffect(() => {
         async function fetchThemes() {
             try {
-                const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/themes`);
+                const response = await axios.get(`https://ladies-of-wisdom.onrender.com/themes`);
                 setthemes(response.data);
             } catch (error) {
                 console.error("Erro ao pegar as themes:", error);
             }
         }
         async function isMaster() {
-            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/master', {
+            const response = await axios.get('https://ladies-of-wisdom.onrender.com/users/master', {
                 headers: {
                     Authorization: `Bearer ${token}`, 
                 },
@@ -69,7 +69,7 @@ function Essay() {
             setMaster(response.data.master);
         }
         async function GetYourEssays() {
-            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/essay/mine', {
+            const response = await axios.get('https://ladies-of-wisdom.onrender.com/essay/mine', {
                 headers: {
                     Authorization: `Bearer ${token}`, 
                 },

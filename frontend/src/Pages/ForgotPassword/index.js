@@ -15,7 +15,7 @@ function Senha() {
             console.log("E-mail do usuário: ", email)
             document.getElementById("user-email").value = '';
 
-            const response = await axios.post(`https://ladies-of-wisdom-production.up.railway.app/users/password`, {
+            const response = await axios.post(`https://ladies-of-wisdom.onrender.com/users/password`, {
                 email: email
             });
 
@@ -34,7 +34,7 @@ function Senha() {
         try {
             const code = document.getElementById('code').value;
             console.log(code);
-            const response = await axios.post("https://ladies-of-wisdom-production.up.railway.app/users/verify", {
+            const response = await axios.post("https://ladies-of-wisdom.onrender.com/users/verify", {
                 code: code, email: user
             })
             const senha = response.data;
@@ -55,7 +55,7 @@ function Senha() {
             const senha2 = document.getElementById("senha2").value;
             if (senha1 == senha2){
                 document.getElementById("wrongPassword").style.display = 'none';
-                const response = await axios.post("https://ladies-of-wisdom-production.up.railway.app/users/newpassword", {
+                const response = await axios.post("https://ladies-of-wisdom.onrender.com/users/newpassword", {
                     senha: senha1, email: user
                 })
                 window.location.href = './login';

@@ -28,7 +28,7 @@ function EssayWriting() {
         }
 
         try {
-            const response = await axios.post('https://ladies-of-wisdom-production.up.railway.app/essay/add', {
+            const response = await axios.post('https://ladies-of-wisdom.onrender.com/essay/add', {
                 text: essayText,
                 token: token,
                 theme: id
@@ -44,7 +44,7 @@ function EssayWriting() {
     useEffect(() => {
         async function GetTheme(id) {
             //chama o tema do backend pelo id da url
-            const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/themes/get/${id}`);
+            const response = await axios.get(`https://ladies-of-wisdom.onrender.com/themes/get/${id}`);
             console.log(response.data);
             setTheme(response.data);
         }

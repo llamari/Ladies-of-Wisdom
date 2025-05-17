@@ -14,7 +14,7 @@ function Sidebar({largura, sidebarRef}){
 
     useEffect(()=>{
         async function GetUser() {
-            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/master', {
+            const response = await axios.get('https://ladies-of-wisdom.onrender.com/users/master', {
                 headers: {
                     Authorization: `Bearer ${token}`, 
                 },

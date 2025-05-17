@@ -19,7 +19,7 @@ function Home() {
     }
 
     async function materias() {
-        const response = await axios.get("https://ladies-of-wisdom-production.up.railway.app/subj/subject");
+        const response = await axios.get("https://ladies-of-wisdom.onrender.com/subj/subject");
         setSubj(response.data);
     }
 

@@ -22,7 +22,7 @@ function Users() {
         try {
             const nome = document.getElementById('new-user-name').value;
             const email = document.getElementById('new-user-email').value;
-            const response = await axios.post('https://ladies-of-wisdom-production.up.railway.app/users/signup', {
+            const response = await axios.post('https://ladies-of-wisdom.onrender.com/users/signup', {
                 email, nome
             })
 
@@ -35,7 +35,7 @@ function Users() {
 
     async function DeleteUser(email) {
         try {
-            const response = await axios.post('https://ladies-of-wisdom-production.up.railway.app/users/delete', {email});
+            const response = await axios.post('https://ladies-of-wisdom.onrender.com/users/delete', {email});
             GetUsers()
         } catch (error) {
             console.error('Erro ao deletar: ', error)
@@ -44,7 +44,7 @@ function Users() {
 
     async function GetUsers() {
         try {
-            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/getall');
+            const response = await axios.get('https://ladies-of-wisdom.onrender.com/users/getall');
             setUsers(response.data);
         } catch (error) {
             console.error('Erro ao pegar usuários: ', error);

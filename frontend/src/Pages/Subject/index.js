@@ -40,7 +40,7 @@ function Subject() {
             const link = linkNormal.concat(fileLink);
 
             const response = await axios.post(
-                'https://ladies-of-wisdom-production.up.railway.app/task/add', 
+                'https://ladies-of-wisdom.onrender.com/task/add', 
                 { title, name, link, id },
                 { headers: { "Content-Type": "application/json" } }
             );
@@ -56,7 +56,7 @@ function Subject() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch("https://ladies-of-wisdom-production.up.railway.app/task/upload", {
+        const response = await fetch("https://ladies-of-wisdom.onrender.com/task/upload", {
             method: "POST",
             body: formData
         });
@@ -79,7 +79,7 @@ function Subject() {
     useEffect(() => {
         async function fetchSubjects() {
             try {
-                const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/subj/subject');
+                const response = await axios.get('https://ladies-of-wisdom.onrender.com/subj/subject');
                 const subjects = response.data;
                 setSubj(subjects.filter((subj) => String(subj.id) === id));
             } catch (err) {
@@ -91,14 +91,14 @@ function Subject() {
         }
         async function fetchTasks() {
             try {
-                const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/task/${id}`);
+                const response = await axios.get(`https://ladies-of-wisdom.onrender.com/task/${id}`);
                 setTasks(response.data);
             } catch (error) {
                 console.error("Erro ao pegar as tasks:", error);
             }
         }
         async function isMaster() {
-            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/master', {
+            const response = await axios.get('https://ladies-of-wisdom.onrender.com/users/master', {
                 headers: {
                     Authorization: `Bearer ${token}`, 
                 },

@@ -10,7 +10,7 @@ function Login() {
         const mail = document.getElementById("e-mail").value;
         const senha = document.getElementById("password").value;
 
-        const response = await axios.post('https://ladies-of-wisdom-production.up.railway.app/users/signin', {
+        const response = await axios.post('https://ladies-of-wisdom.onrender.com/users/signin', {
             email: mail, senha: senha
         })
 
