@@ -8,20 +8,17 @@ import './index.css';
 
 function Essay() {
     const id = 'essay';
-    const [subj, setSubj] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [themes, setthemes] = useState([]);
     const [master, setMaster] = useState('');
     const token = localStorage.getItem('token');
     const [largura, setlargura] = useState(0);
     const sidebarRef = useRef(null); // Cria uma referência para a sidebar
     const [myEssays, setMyEssays] = useState([]);
-    
+
     function OpenSidebar() {
         setlargura(200);
     }
-    
+
     function CloseSidebar() {
         setlargura(0);
     }
@@ -32,7 +29,7 @@ function Essay() {
             const texts = document.getElementById('theme-text').value;
 
             const response = await axios.post(
-                'https://ladies-of-wisdom.onrender.com/themes/add', 
+                'https://ladies-of-wisdom-production.up.railway.app/themes/add',
                 { title, texts },
                 { headers: { "Content-Type": "application/json" } }
             );
@@ -41,7 +38,7 @@ function Essay() {
         } catch (error) {
             console.error("Erro ao enviar a tarefa:", error);
         }
-    }   
+    }
 
     async function OpenPopUp() {
         document.getElementById('popup-add-task').style.display = 'flex'
@@ -54,24 +51,24 @@ function Essay() {
     useEffect(() => {
         async function fetchThemes() {
             try {
-                const response = await axios.get(`https://ladies-of-wisdom.onrender.com/themes`);
+                const response = await axios.get(`https://ladies-of-wisdom-production.up.railway.app/themes`);
                 setthemes(response.data);
             } catch (error) {
                 console.error("Erro ao pegar as themes:", error);
             }
         }
         async function isMaster() {
-            const response = await axios.get('https://ladies-of-wisdom.onrender.com/users/master', {
+            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/users/master', {
                 headers: {
-                    Authorization: `Bearer ${token}`, 
+                    Authorization: `Bearer ${token}`,
                 },
             })
             setMaster(response.data.master);
         }
         async function GetYourEssays() {
-            const response = await axios.get('https://ladies-of-wisdom.onrender.com/essay/mine', {
+            const response = await axios.get('https://ladies-of-wisdom-production.up.railway.app/essay/mine', {
                 headers: {
-                    Authorization: `Bearer ${token}`, 
+                    Authorization: `Bearer ${token}`,
                 },
             })
             console.log(response.data);
@@ -80,7 +77,7 @@ function Essay() {
         fetchThemes();
         isMaster();
         GetYourEssays();
-    }, [id]); 
+    }, [id]);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -99,51 +96,58 @@ function Essay() {
     return (
         <div>
             <header id="header">
-                <Link to={'/home'}><img src="/assets/LW.png" alt="Logo"/></Link>
-                <FaRegUserCircle className="icon-user" color="white" size={60} onClick={OpenSidebar} style={{cursor: 'pointer'}}/>
+                <Link to={'/home'}><img src="/assets/LW.png" alt="Logo" /></Link>
+                <FaRegUserCircle className="icon-user" color="white" size={60} onClick={OpenSidebar} style={{ cursor: 'pointer' }} />
             </header>
-            <Sidebar largura={largura} sidebarRef={sidebarRef}/>
+            <Sidebar largura={largura} sidebarRef={sidebarRef} />
 
             <div className="background-subject">
                 <div>
                     <h1>Redação</h1>
                 </div>
 
-                {master ?
+                {master === '' ? (
+                    <p>Carregando...</p> // ou pode ser um spinner
+                ) : master ?
                     <div>
                         <div className="add-task" onClick={OpenPopUp}>
                             <h1>+</h1>
-                        </div> 
+                        </div>
                         {Array.isArray(themes) && themes.map((theme) => (
-                            <Link to={`/essay/${theme._id}`}>
+                            <Link to={`/users/essay/${theme._id}`}>
                                 <div className="task" key={theme._id}>
                                     <h2>{theme.title}</h2>
                                 </div>
                             </Link>
                         ))}
-                    </div>  
+                    </div>
                     :
                     <div>
                         {Array.isArray(themes) && themes.map((theme) => {
-                            // Filtra as redações do usuário para o tema atual
                             const essaysForTheme = myEssays?.filter((mine) => mine.theme === theme._id) || [];
-                            return (
-                                <Link to={`/essay/${theme._id}`}>
-                                    <div className="task" key={theme._id}>
+
+                            return essaysForTheme.length > 0 ? (
+                                essaysForTheme.map((mine) => (
+                                    <Link to={`/corrected/essay/${theme._id}`} key={mine._id}>
+                                        <div className="task">
+                                            <h2>{theme.title}</h2>
+                                            <div>
+                                                {mine.grade !== null ? (
+                                                    <span>CORRIGIDO</span>
+                                                ) : (
+                                                    <span>NÃO CORRIGIDO</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                ))
+                            ) : (
+                                <Link to={`/essay/${theme._id}`} key={theme._id}>
+                                    <div className="task">
                                         <h2>{theme.title}</h2>
-                                        {essaysForTheme.length > 0 ? (
-                                            essaysForTheme.map((mine) => (
-                                                <div key={mine._id}>
-                                                    {mine.grade !== null ? (
-                                                        <span>CORRIGIDO</span>
-                                                    ) : (
-                                                        <span>NÃO CORRIGIDO</span>
-                                                    )}
-                                                </div>
-                                            ))
-                                        ) : (
+                                        <div>
                                             <span>A FAZER</span>
-                                        )}
+                                        </div>
                                     </div>
                                 </Link>
                             );
@@ -152,16 +156,16 @@ function Essay() {
                 }
             </div>
 
-            <div id="popup-add-task" style={{display: 'none'}}>
+            <div id="popup-add-task" style={{ display: 'none' }}>
                 <form onSubmit={Sends}>
-                    <IoClose style={{float: 'right'}} size={25} onClick={ClosePopUp}/>
+                    <IoClose style={{ float: 'right' }} size={25} onClick={ClosePopUp} />
                     <label htmlFor="theme-title">Insira o título do post:</label>
-                    <br/>
+                    <br />
                     <label>Tema: </label>
-                    <input id="theme-title"/>
-                    <br/>
+                    <input id="theme-title" />
+                    <br />
                     <label>Textos de apoio:</label>
-                    <textarea type="text" id="theme-text"/>
+                    <textarea type="text" id="theme-text" />
 
                     <button type="submit">ENVIAR</button>
                 </form>

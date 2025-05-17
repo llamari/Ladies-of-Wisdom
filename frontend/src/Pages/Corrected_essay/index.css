@@ -1,0 +1,10 @@
+.essay_correction{
+    background-color: #FFF;
+    width: 100%;
+    margin: 0 ;
+    border-radius: 1rem;
+    height: auto;
+    padding: .5rem;
+    color: black;
+    min-height: 50vh;
+}
