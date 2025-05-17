@@ -117,4 +117,13 @@ body{
         flex-direction: column;
         padding: 2rem 0;
     }
+
+    #platform, #the-project{
+        flex-direction: column;
+    }
+
+    #platform-img, #project-img{
+        width: 85%;
+        max-width: 100%;
+    }
 }
